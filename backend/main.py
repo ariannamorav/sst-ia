@@ -17,7 +17,7 @@ def descargar_datasets():
     except ImportError:
         pass
 
-    api_key = os.environ.get("ROBOFLOW_API_KEY", "TU_API_KEY_AQUI")
+    api_key = os.environ.get("ROBOFLOW_API_KEY", "wFNVbgBUcGbkOi1gz6iJ")
     
     if not api_key or api_key == "TU_API_KEY_AQUI":
         print("⚠️ ADVERTENCIA: Debes configurar tu ROBOFLOW_API_KEY en .env o como variable de entorno.")
