@@ -15,9 +15,19 @@ class _CapturaEvidenciaScreenState extends State<CapturaEvidenciaScreen> {
   String? _foto;
   String? _error; // 'cancelada' | 'permiso'
 
-  Future<void> _tomar() async {
+  Future<void> _tomar({bool galeria = false}) async {
     try {
-      final x = await ImagePicker().pickImage(source: ImageSource.camera, imageQuality: 85, maxWidth: 1600);
+      XFile? x;
+      if (!galeria) {
+        try {
+          x = await ImagePicker().pickImage(source: ImageSource.camera, imageQuality: 85, maxWidth: 1600);
+        } catch (_) {
+          // En Windows Desktop, ImageSource.camera no está disponible; usamos el selector de imágenes de Windows
+          x = await ImagePicker().pickImage(source: ImageSource.gallery, imageQuality: 85, maxWidth: 1600);
+        }
+      } else {
+        x = await ImagePicker().pickImage(source: ImageSource.gallery, imageQuality: 85, maxWidth: 1600);
+      }
       setState(() { _foto = x?.path; _error = x == null ? 'cancelada' : null; });
     } catch (_) {
       setState(() => _error = 'permiso');
@@ -27,9 +37,9 @@ class _CapturaEvidenciaScreenState extends State<CapturaEvidenciaScreen> {
   Widget _visor() {
     if (_foto != null) return Foto(_foto);
     final (icono, t, m) = switch (_error) {
-      'permiso' => (Icons.no_photography_outlined, 'No tenemos acceso a la cámara.', 'Puedes habilitar el permiso desde la configuración del dispositivo.'),
-      'cancelada' => (Icons.photo_camera_outlined, 'Fotografía cancelada', 'No se tomó ninguna fotografía. Puedes intentarlo nuevamente.'),
-      _ => (Icons.photo_camera_outlined, 'Captura la evidencia', 'Encuadra la señalización y toma la fotografía.'),
+      'permiso' => (Icons.photo_library_outlined, 'No se pudo abrir la cámara o archivo.', 'Puedes seleccionar una fotografía directamente desde tu equipo.'),
+      'cancelada' => (Icons.photo_camera_outlined, 'Captura cancelada', 'No se seleccionó ninguna imagen. Puedes intentarlo nuevamente.'),
+      _ => (Icons.photo_camera_outlined, 'Captura la evidencia', 'Toma una fotografía o selecciona una imagen desde tu PC.'),
     };
     return Container(
         decoration: BoxDecoration(color: C.navy, borderRadius: BorderRadius.circular(14)),
@@ -47,13 +57,15 @@ class _CapturaEvidenciaScreenState extends State<CapturaEvidenciaScreen> {
           Expanded(child: SizedBox(width: double.infinity, child: _visor())),
           const SizedBox(height: 16),
           if (_foto == null) ...[
-            AppButton('Tomar fotografía', icon: Icons.photo_camera, onPressed: _tomar),
+            AppButton('Tomar fotografía', icon: Icons.photo_camera, onPressed: () => _tomar()),
+            const SizedBox(height: 10),
+            AppButton('Seleccionar imagen del PC', icon: Icons.folder_open, estilo: EstiloBoton.contorno, onPressed: () => _tomar(galeria: true)),
             const SizedBox(height: 10),
             AppButton('Volver', estilo: EstiloBoton.suave, onPressed: () => Navigator.pop(context)),
           ] else ...[
             AppButton('Usar esta fotografía', icon: Icons.check, onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => EvidenciaScreen(_foto!)))),
             const SizedBox(height: 10),
-            AppButton('Repetir fotografía', icon: Icons.refresh, estilo: EstiloBoton.contorno, onPressed: _tomar),
+            AppButton('Repetir / Cambiar fotografía', icon: Icons.refresh, estilo: EstiloBoton.contorno, onPressed: () => _tomar(galeria: true)),
           ],
         ]))),
       );

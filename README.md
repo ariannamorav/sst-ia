@@ -1,13 +1,15 @@
-> **Estado del proyecto:** MVP funcional. El análisis de hallazgos implementado actualmente es simulado y utiliza reglas y palabras clave. 
+# SST-IA - Aplicación Móvil y Web de Inspección SST
 
-## Funcionalidades
+> **Sistema Completo:** Aplicación Flutter integrada con el motor de Inteligencia Artificial (Backend en Python con YOLOv8 y Roboflow). Permite la inspección en campo, captura fotográfica de señales y elementos de seguridad, detección automática por visión artificial, validación normativa (NTC / ISO) y generación de informes en PDF.
 
-- Registro y consulta de inspecciones.
-- Captura y registro de evidencias fotográficas.
-- Análisis orientativo de hallazgos mediante reglas locales.
-- Revisión y validación manual de hallazgos.
-- Consulta de hallazgos e historial.
-- Generación de informes en PDF.
+## Funcionalidades Principales
+
+- **Detección Automática por IA:** Conexión en tiempo real con el servidor de visión artificial (`http://localhost:5000/analizar`) para clasificar señales de evacuación, incendio, advertencia, obligación y prohibición.
+- **Modo Offline / Respaldo:** En caso de no tener el backend encendido, cuenta con un motor de reglas y palabras clave local para no detener la operación.
+- **Registro de Inspecciones:** Creación y seguimiento de inspecciones por sede, área y responsable.
+- **Captura de Evidencias:** Compatible con cámara en vivo y carga de imágenes en Web, Desktop (Windows) y Móvil (Android/iOS).
+- **Validación Normativa:** Revisión de hallazgos contra el catálogo de 20 normas de seguridad y salud en el trabajo.
+- **Reportes en PDF:** Exportación inmediata de informes técnicos de inspección para brigadas y comités de SST.
 
 ## Tecnologías utilizadas
 
