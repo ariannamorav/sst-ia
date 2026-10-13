@@ -74,4 +74,7 @@ backend/.venv/
 backend/runs/
 backend/*.pt
 backend/*.onnx
+Signs-*/
+signs-*/
+
 
