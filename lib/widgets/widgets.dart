@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import '../models/hallazgo.dart';
 import '../utils/constants.dart';
@@ -91,11 +92,31 @@ class Foto extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: SizedBox(
           height: height, width: width,
-          child: path != null && File(path!).existsSync()
-              ? Image.file(File(path!), fit: BoxFit.cover)
-              : Container(color: C.gris, child: const Icon(Icons.image_outlined, color: C.texto2)),
+          // En Flutter Web, File.existsSync() lanza Unsupported operation:
+          // _Namespace. image_picker devuelve una URL temporal (blob:) que
+          // debe mostrarse con Image.network. En Android/iOS se usa Image.file.
+          child: path == null
+              ? Container(color: C.gris, child: const Icon(Icons.image_outlined, color: C.texto2))
+              : kIsWeb
+                  ? Image.network(
+                      path!,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) => Container(
+                        color: C.gris,
+                        child: const Icon(Icons.image_outlined, color: C.texto2),
+                      ),
+                    )
+                  : _fotoLocal(path!),
         ),
       );
+}
+
+
+Widget _fotoLocal(String path) {
+  final file = File(path);
+  return file.existsSync()
+      ? Image.file(file, fit: BoxFit.cover)
+      : Container(color: C.gris, child: const Icon(Icons.image_outlined, color: C.texto2));
 }
 
 class FindingCard extends StatelessWidget {
