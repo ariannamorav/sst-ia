@@ -65,3 +65,16 @@ app.*.map.json
 
 # Logs y archivos temporales de herramientas
 *.lock.tmp
+
+# Python Backend & Modelos
+**/__pycache__/
+**/*.py[cod]
+backend/venv/
+backend/.venv/
+backend/runs/
+backend/*.pt
+backend/*.onnx
+Signs-*/
+signs-*/
+
+

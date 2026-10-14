@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../models/hallazgo.dart';
 import '../utils/constants.dart';
@@ -81,21 +82,36 @@ class ConfidenceBar extends StatelessWidget {
       ]);
 }
 
-/// Foto desde archivo con respaldo cuando no existe.
+/// Foto desde archivo con respaldo cuando no existe, compatible con Web y Desktop/Mobile.
 class Foto extends StatelessWidget {
   final String? path;
   final double? height, width;
   const Foto(this.path, {super.key, this.height, this.width});
   @override
-  Widget build(BuildContext context) => ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: SizedBox(
-          height: height, width: width,
-          child: path != null && File(path!).existsSync()
-              ? Image.file(File(path!), fit: BoxFit.cover)
-              : Container(color: C.gris, child: const Icon(Icons.image_outlined, color: C.texto2)),
-        ),
+  Widget build(BuildContext context) {
+    if (path == null || path!.isEmpty) {
+      return Container(height: height, width: width, color: C.gris, child: const Icon(Icons.image_outlined, color: C.texto2));
+    }
+
+    Widget imgWidget;
+    if (kIsWeb) {
+      imgWidget = Image.network(
+        path!,
+        fit: BoxFit.cover,
+        errorBuilder: (_, __, ___) => Container(color: C.gris, child: const Icon(Icons.broken_image_outlined, color: C.texto2)),
       );
+    } else {
+      final f = File(path!);
+      imgWidget = f.existsSync()
+          ? Image.file(f, fit: BoxFit.cover)
+          : Container(color: C.gris, child: const Icon(Icons.image_outlined, color: C.texto2));
+    }
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+      child: SizedBox(height: height, width: width, child: imgWidget),
+    );
+  }
 }
 
 class FindingCard extends StatelessWidget {

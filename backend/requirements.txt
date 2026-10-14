@@ -1,0 +1,16 @@
+# Dependencias de Python para SST-IA (Sistema de Inspección SST con IA)
+# Instalar con: pip install -r requirements.txt
+
+# Comunicación HTTP y API REST
+requests>=2.28.0
+
+# Procesamiento de imágenes y Visión por Computador
+Pillow>=9.5.0
+opencv-python>=4.8.0
+
+# Configuración de variables de entorno
+python-dotenv>=1.0.0
+
+# Modelos YOLOv8 y Roboflow Datasets
+ultralytics>=8.0.0
+roboflow>=1.1.0

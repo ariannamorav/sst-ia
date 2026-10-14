@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/splash_screen.dart';
+import 'services/analisis_ia_service.dart';
 import 'services/analisis_service.dart';
-import 'services/analisis_simulado_service.dart';
 import 'services/app_state.dart';
 import 'theme/app_theme.dart';
 
 void main() => runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AppState()),
-        // TODO: cambiar a ServicioAnalisisGemini() cuando exista (las pantallas no cambian).
-        Provider<AnalisisService>(create: (_) => ServicioAnalisisSimulado()),
+        // Conexión con el Backend de Python (YOLO + Datasets Roboflow)
+        Provider<AnalisisService>(create: (_) => ServicioAnalisisIAService()),
       ],
       child: const SstIaApp(),
     ));
