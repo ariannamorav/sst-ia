@@ -7,7 +7,7 @@
 - Análisis orientativo de hallazgos mediante reglas locales.
 - Revisión y validación manual de hallazgos.
 - Consulta de hallazgos e historial.
-- Generación de informes en PDF.
+- Generación de informes en PDF
 
 ## Tecnologías utilizadas
 
