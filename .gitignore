@@ -1,0 +1,84 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+*.tmp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+Thumbs.db
+desktop.ini
+
+# Android Studio
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# Flutter / Dart / Pub
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+
+# Archivos generados y depuración
+app.*.symbols
+app.*.map.json
+.widget_preview/
+
+# Android: archivos generados
+/android/app/debug
+/android/app/profile
+/android/app/release
+/android/.gradle/
+/android/.cxx/
+
+# Android: configuración local
+/android/local.properties
+
+# Android: credenciales y firma
+/android/key.properties
+**/key.properties
+*.jks
+*.keystore
+*.p12
+*.pfx
+
+# Archivos de entorno y secretos
+.env
+.env.*
+!.env.example
+
+# Logs y archivos temporales de herramientas
+*.lock.tmp
+
+
+# Backend Python: no subir a Git
+backend/
+
+# Entorno y archivos privados
+.venv/
+.env
+**/.env
+__pycache__/
+*.pyc
+
+# Archivos generados por Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
