@@ -1,4 +1,4 @@
-# Miscellaneous
+# Miscellaneous & OS
 *.class
 *.log
 *.pyc
@@ -15,13 +15,11 @@ migrate_working_dir/
 Thumbs.db
 desktop.ini
 
-# Android Studio
+# Android Studio & IDEs
 *.iml
 *.ipr
 *.iws
 .idea/
-
-# Visual Studio Code
 .vscode/
 
 # Flutter / Dart / Pub
@@ -30,28 +28,30 @@ desktop.ini
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
+.packages
 .pub-cache/
 .pub/
-/build/
+build/
+**/build/
 /coverage/
 
-# Archivos generados y depuración
+# Archivos generados y depuracion
 app.*.symbols
 app.*.map.json
 .widget_preview/
 
-# Android: archivos generados
-/android/app/debug
-/android/app/profile
-/android/app/release
-/android/.gradle/
-/android/.cxx/
-
-# Android: configuración local
-/android/local.properties
+# Android: archivos generados y configuracion local
+android/.gradle/
+android/.cxx/
+android/app/debug
+android/app/profile
+android/app/release
+android/local.properties
+**/local.properties
+android/build/
+**/android/build/
 
 # Android: credenciales y firma
-/android/key.properties
 **/key.properties
 *.jks
 *.keystore
@@ -63,18 +63,25 @@ app.*.map.json
 .env.*
 !.env.example
 
-# Logs y archivos temporales de herramientas
+# Logs y archivos temporales
 *.lock.tmp
 
-# Python Backend & Modelos
+# Python Backend & Cache
 **/__pycache__/
 **/*.py[cod]
 backend/venv/
 backend/.venv/
-backend/runs/
-backend/*.pt
-backend/*.onnx
+venv/
+.venv/
+
+# Carpetas de entrenamiento y datasets pesados de Roboflow
+dataset/
+**/dataset/
+evidencias_capturadas/
+**/evidencias_capturadas/
+runs/
+**/runs/
 Signs-*/
 signs-*/
-
-
+*.zip
+*.tar.gz

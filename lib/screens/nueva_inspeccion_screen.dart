@@ -31,7 +31,7 @@ class _NuevaInspeccionScreenState extends State<NuevaInspeccionScreen> {
   Widget _combo(String l, List<String> items, String? v, void Function(String?) f) => Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Etiqueta(l),
         DropdownButtonFormField<String>(
-            value: v, isExpanded: true, validator: requerido, hint: Text('Selecciona $l'.toLowerCase()),
+            initialValue: v, isExpanded: true, validator: requerido, hint: Text('Selecciona $l'.toLowerCase()),
             items: items.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(), onChanged: f),
       ]);
 

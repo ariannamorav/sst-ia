@@ -34,7 +34,7 @@ class _EvidenciaScreenState extends State<EvidenciaScreen> {
           const Etiqueta('Ubicación específica'),
           TextFormField(controller: _ubi, validator: requerido, decoration: const InputDecoration(prefixIcon: Icon(Icons.location_on_outlined, size: 20), hintText: 'Pasillo segundo piso')),
           const Etiqueta('Tipo de señalización (opcional)'),
-          DropdownButtonFormField<String>(value: _tipo, isExpanded: true, hint: const Text('Selecciona un tipo'),
+          DropdownButtonFormField<String>(initialValue: _tipo, isExpanded: true, hint: const Text('Selecciona un tipo'),
               items: tiposSenal.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(), onChanged: (v) => _tipo = v),
           const Etiqueta('Información adicional (opcional)'),
           TextFormField(controller: _extra, maxLines: 2, decoration: const InputDecoration(hintText: 'Añade más detalles relevantes...')),

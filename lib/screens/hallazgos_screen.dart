@@ -14,7 +14,7 @@ class HallazgosScreen extends StatelessWidget {
 
   Widget _stat(String n, String l, Color c) => Expanded(
       child: Container(margin: const EdgeInsets.symmetric(horizontal: 4), padding: const EdgeInsets.symmetric(vertical: 12),
-          decoration: BoxDecoration(color: c.withOpacity(.08), borderRadius: BorderRadius.circular(12)),
+          decoration: BoxDecoration(color: c.withValues(alpha: .08), borderRadius: BorderRadius.circular(12)),
           child: Column(children: [Text(n, style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: c)), Text(l, style: const TextStyle(fontSize: 12, color: C.texto2))])));
 
   @override
