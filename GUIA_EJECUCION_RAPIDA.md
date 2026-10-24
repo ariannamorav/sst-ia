@@ -24,17 +24,16 @@ Desde tu terminal de PowerShell en la carpeta principal `C:\Users\Yairc\Document
 
 ## 🛠️ Opción 2: Inicio Manual en Dos Pasos
 
-Si prefieres abrir cada terminal por separado:
+Si prefieres abrir cada terminal por separado dentro de la carpeta del proyecto:
 
 ### Terminal 1: Backend de IA (Python)
 ```powershell
-cd C:\Users\Yairc\Documents\Universidad\IA\Modulo_SST_IA
+cd Modulo_SST_IA
 python server.py
 ```
 
 ### Terminal 2: Aplicación Web (Flutter)
 ```powershell
-cd C:\Users\Yairc\Documents\Universidad\IA\sst-ia
 flutter run -d chrome --web-port 8085
 ```
 

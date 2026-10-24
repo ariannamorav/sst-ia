@@ -7,7 +7,18 @@ Write-Host "         INICIANDO TODO EL ECOSISTEMA SST-IA            " -Foregroun
 Write-Host "========================================================" -ForegroundColor Cyan
 Write-Host ""
 
-$baseDir = "C:\Users\Yairc\Documents\Universidad\IA"
+# Detectar rutas relativas al script para que funcione en la maquina de cualquier companero
+$baseDir = $PSScriptRoot
+
+$moduloDir = Join-Path $baseDir "Modulo_SST_IA"
+if (-not (Test-Path $moduloDir)) {
+    $moduloDir = Join-Path (Split-Path $baseDir -Parent) "Modulo_SST_IA"
+}
+
+$flutterDir = $baseDir
+if (-not (Test-Path (Join-Path $flutterDir "pubspec.yaml"))) {
+    $flutterDir = Join-Path $baseDir "sst-ia"
+}
 
 # 1. Liberar puertos 5000 o 8085 si quedaron procesos anteriores colgados
 Write-Host "[1/3] Verificando puertos..." -ForegroundColor Yellow
@@ -22,14 +33,14 @@ foreach ($p in $puertos) {
 
 # 2. Iniciar Backend Python (FastAPI + YOLOv8 + ReportLab)
 Write-Host "[2/3] Levantando Servidor Backend Python en http://localhost:5000..." -ForegroundColor Green
-$cmdBackend = "cd '$baseDir\Modulo_SST_IA'; python server.py"
+$cmdBackend = "cd '$moduloDir'; python server.py"
 Start-Process powershell -ArgumentList "-NoExit", "-Command", $cmdBackend
 
 Start-Sleep -Seconds 3
 
 # 3. Iniciar Frontend Flutter Web
 Write-Host "[3/3] Levantando Aplicacion Flutter Web en http://localhost:8085..." -ForegroundColor Green
-$cmdFrontend = "cd '$baseDir\sst-ia'; flutter run -d chrome --web-port 8085"
+$cmdFrontend = "cd '$flutterDir'; flutter run -d chrome --web-port 8085"
 Start-Process powershell -ArgumentList "-NoExit", "-Command", $cmdFrontend
 
 Write-Host ""
