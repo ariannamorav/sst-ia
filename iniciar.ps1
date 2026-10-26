@@ -38,9 +38,16 @@ Start-Process powershell -ArgumentList "-NoExit", "-Command", $cmdBackend
 
 Start-Sleep -Seconds 3
 
+# Asegurar que Flutter este en PATH
+if (-not (Get-Command flutter -ErrorAction SilentlyContinue)) {
+    if (Test-Path "C:\src\flutter\bin") {
+        $env:PATH = "C:\src\flutter\bin;" + $env:PATH
+    }
+}
+
 # 3. Iniciar Frontend Flutter Web
 Write-Host "[3/3] Levantando Aplicacion Flutter Web en http://localhost:8085..." -ForegroundColor Green
-$cmdFrontend = "cd '$flutterDir'; flutter run -d chrome --web-port 8085"
+$cmdFrontend = "`$env:PATH = 'C:\src\flutter\bin;' + `$env:PATH; cd '$flutterDir'; flutter run -d chrome --web-port 8085"
 Start-Process powershell -ArgumentList "-NoExit", "-Command", $cmdFrontend
 
 Write-Host ""

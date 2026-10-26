@@ -32,7 +32,7 @@ class ServicioAnalisisIAService implements AnalisisService {
 
       if (fotoB64.isEmpty) {
         debugPrint('[SST-IA] Foto vacía, usando fallback normativo.');
-        return _fallback.analizar(e);
+        return await _fallback.analizar(e);
       }
 
       final payload = jsonEncode({
@@ -117,11 +117,11 @@ class ServicioAnalisisIAService implements AnalisisService {
         );
       } else {
         debugPrint('[SST-IA] Servidor retornó ${resp.statusCode}. Activando fallback normativo.');
-        return _fallback.analizar(e);
+        return await _fallback.analizar(e);
       }
     } catch (err) {
       debugPrint('[SST-IA] Error al comunicar con backend Modulo_SST_IA ($err). Activando fallback.');
-      return _fallback.analizar(e);
+      return await _fallback.analizar(e);
     }
   }
 }
